@@ -42,8 +42,8 @@ class ItemReader:
        item.hp = utils.decode_number([buf[5], buf[6]])
        item.tp = utils.decode_number([buf[7], buf[8]])
 
-       item.min_dam = utils.decode_number([buf[9], buf[10]])
-       item.max_dam = utils.decode_number([buf[11], buf[12]])
+       item.min_damage = utils.decode_number([buf[9], buf[10]])
+       item.max_damage = utils.decode_number([buf[11], buf[12]])
        item.accuracy = utils.decode_number([buf[13], buf[14]])
        item.evade = utils.decode_number([buf[15], buf[16]])
        item.armor = utils.decode_number([buf[17], buf[18]])
@@ -62,28 +62,41 @@ class ItemReader:
        item.water = utils.decode_number([buf[30]])
        item.fire = utils.decode_number([buf[31]])
 
-       item.scroll_map = utils.decode_number([buf[32], buf[33], buf[34]])
-       item.doll_graphic = item.scroll_map
-       item.exp_reward = item.scroll_map
-       item.hair_color = item.scroll_map
-       item.effect = item.scroll_map
-       item.key = item.scroll_map
+       temp = utils.decode_number([buf[32], buf[33], buf[34]])
+       if item.type == Type.Teleport:
+           item.scroll_map = temp 
+       elif item.type == Type.EXPReward:
+           item.exp_reward = temp 
+       elif item.type == Type.HairDye:
+           item.hair_color = temp
+       elif item.type == Type.EffectPotion:
+           item.effect = temp
+       elif item.type == Type.Key:
+           item.key = temp
+       else:
+           item.doll_graphic = temp
 
-       item.scroll_x = utils.decode_number([buf[35]])
-       item.gender = item.scroll_x
+       temp = utils.decode_number([buf[35]])
+       if item.type  == Type.Teleport:
+           item.scroll_x = temp
+       else:
+           item.gender = temp 
 
-       item.scroll_y = utils.decode_number([buf[36]])
-       item.dual_wield_doll_graphic = item.scroll_y
+       temp = utils.decode_number([buf[36]])
+       if item.type == Type.Teleport:
+           item.scroll_y = temp 
+       else:
+           item.dual_wield_doll_graphic = temp
 
-       item.level_req = utils.decode_number([buf[37], buf[38]])
-       item.class_req = utils.decode_number([buf[39], buf[40]])
-
-       item.str_req = utils.decode_number([buf[41], buf[42]])
-       item.int_req = utils.decode_number([buf[43], buf[44]])
-       item.wis_req = utils.decode_number([buf[45], buf[46]])
-       item.agi_req = utils.decode_number([buf[47], buf[48]])
-       item.con_req = utils.decode_number([buf[49], buf[50]])
-       item.cha_req = utils.decode_number([buf[51], buf[52]])
+       if item.is_equipable():
+           item.level_req = utils.decode_number([buf[37], buf[38]])
+           item.class_req = utils.decode_number([buf[39], buf[40]])
+           item.str_req = utils.decode_number([buf[41], buf[42]])
+           item.int_req = utils.decode_number([buf[43], buf[44]])
+           item.wis_req = utils.decode_number([buf[45], buf[46]])
+           item.agi_req = utils.decode_number([buf[47], buf[48]])
+           item.con_req = utils.decode_number([buf[49], buf[50]])
+           item.cha_req = utils.decode_number([buf[51], buf[52]])
 
        item.weight = utils.decode_number([buf[55]])
        item.size = Size(utils.decode_number([buf[57]]))

@@ -1,11 +1,70 @@
 from enum import Enum
+from tabulate import tabulate
 
 class Item:
     def __init__(self):
         self.id = 0
 
+    def is_equipable(self):
+        if self.type in [Type.Weapon, Type.Shield, Type.Armor, Type.Hat, Type.Boots,
+                         Type.Gloves, Type.Accessory, Type.Belt, Type.Necklace,
+                         Type.Ring, Type.Armlet, Type.Bracer]:
+            return True
+
+        return False
+
+    def print_stats(self):
+        if self.is_equipable():
+            print("Stats:")
+            table = [["HP", f"+{self.hp}", "TP", f"+{self.tp}", "Damage",
+                  f"{self.min_damage} - {self.max_damage}"],
+                 ["STR", f"+{self.str}", "INT", f"+{self.int}", "Accuracy",
+                  f"{self.accuracy}"],
+                 ["WIS", f"+{self.wis}", "AGI", f"+{self.agi}", "Armor",
+                  f"{self.armor}"],
+                 ["CON", f"+{self.con}", "CHA", f"+{self.cha}", "Evade",
+                  f"{self.evade}"]]
+            print(tabulate(table, tablefmt="fancy_grid"))
+
+    def print_requirements(self):
+        if self.is_equipable():
+            table = []
+            if self.level_req > 0:
+                table.append(["Level", self.level_req])
+            if self.class_req > 0:
+                table.append(["Class", self.class_req]) # todo: use class name
+            if self.str_req > 0:
+                table.append(["Str", self.str_req])
+            if self.int_req > 0:
+                table.append(["Int", self.int_req])
+            if self.wis_req > 0:
+                table.append(["Wis", self.wis_req])
+            if self.agi_req > 0:
+                table.append(["Agi", self.agi_req])
+            if self.con_req > 0:
+                table.append(["Con", self.con_req])
+            if self.cha_req > 0:
+                table.append(["Cha", self.cha_req])
+            if len(table) > 0:
+                print("Requirements:")
+                print(tabulate(table, tablefmt="fancy_grid"))
+
+    def print_effect(self):
+        if self.type == Type.Teleport:
+            print(f"Map: {self.scroll_map}, X: {self.scroll_x}, Y: {self.scroll_y}")
+        elif self.type == Type.Heal and self.hp + self.tp > 0:
+            print(tabulate([["HP", f"+{self.hp}"], ["TP", f"+{self.tp}"]],
+                tablefmt="fancy_grid"))
+        elif self.type == Type.EXPReward:
+            print(f"EXP: {self.exp_reward}")
+
+
     def print(self):
         print(f"{self.id} - {self.name}")
+        self.print_stats()
+        self.print_requirements()
+        self.print_effect()
+        print('')
 
 class Special(Enum):
     Normal = 0
