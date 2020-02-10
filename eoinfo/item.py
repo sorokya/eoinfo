@@ -3,4 +3,4 @@ class Item:
         self.id = 0
 
     def print(self):
-        print(f"{self.id}")
+        print(f"{self.id} - {self.name}")

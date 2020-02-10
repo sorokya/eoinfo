@@ -23,10 +23,9 @@ def parse_args_exit(parser):
         sys.exit(1)
 
 def print_items(search_term):
-    print(search_term)
     item_reader = ItemReader("pub/dat001.eif")
-    item_reader.read()
-    item_reader.item.print()
+    while item_reader.read():
+        item_reader.item.print()
 
 def print_npcs(search_term):
     print(search_term)
