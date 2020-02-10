@@ -8,7 +8,7 @@ class Item:
     def is_equipable(self):
         return self.type in [Type.Weapon, Type.Shield, Type.Armor, Type.Hat, Type.Boots,
                 Type.Gloves, Type.Accessory, Type.Belt, Type.Necklace, Type.Ring,
-                Type.Armlet, Type.Bracer]:
+                Type.Armlet, Type.Bracer]
 
     def print_stats(self):
         if self.is_equipable():
