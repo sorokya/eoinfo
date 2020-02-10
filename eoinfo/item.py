@@ -6,12 +6,9 @@ class Item:
         self.id = 0
 
     def is_equipable(self):
-        if self.type in [Type.Weapon, Type.Shield, Type.Armor, Type.Hat, Type.Boots,
-                         Type.Gloves, Type.Accessory, Type.Belt, Type.Necklace,
-                         Type.Ring, Type.Armlet, Type.Bracer]:
-            return True
-
-        return False
+        return self.type in [Type.Weapon, Type.Shield, Type.Armor, Type.Hat, Type.Boots,
+                Type.Gloves, Type.Accessory, Type.Belt, Type.Necklace, Type.Ring,
+                Type.Armlet, Type.Bracer]:
 
     def print_stats(self):
         if self.is_equipable():
