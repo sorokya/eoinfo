@@ -1,6 +1,8 @@
 import argparse
 import sys
 from item_reader import ItemReader
+from item_printer import ItemPrinter
+from npc_reader import NpcReader
 
 def get_args():
     description = "eoinfo - your offline data explorer for Endless Online"
@@ -24,11 +26,15 @@ def parse_args_exit(parser):
 
 def print_items(search_term):
     item_reader = ItemReader("pub/dat001.eif")
+    item_printer = ItemPrinter()
     while item_reader.read():
-        item_reader.item.print()
+        item_printer.print(item_reader.item)
 
 def print_npcs(search_term):
     print(search_term)
+    #npc_reader = NpcReader("pub/dtn001.enf")
+    #while npc_reader.read():
+    #    npc_reader.npc.print()
 
 def print_spells(search_term):
     print(search_term)

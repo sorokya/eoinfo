@@ -1,15 +1,60 @@
-from enum import Enum
-from tabulate import tabulate
+from item_type import Type
+from item_sub_type import SubType
+from item_special import Special
+from item_size import Size
 
 class Item:
     def __init__(self):
         self.id = 0
+        self.name = ""
+        self.graphic = 0
+        self.type = Type.Static
+        self.sub_type = SubType.Nil
+        self.special = Special.Normal
+        self.hp = 0
+        self.tp = 0
+        self.min_damage = 0
+        self.max_damage = 0
+        self.accuracy = 0
+        self.evade = 0
+        self.armor = 0
+        self.str = 0
+        self.int = 0
+        self.wis = 0
+        self.agi = 0
+        self.con = 0
+        self.cha = 0
+        self.light = 0
+        self.dark = 0
+        self.earth = 0
+        self.air = 0
+        self.water = 0
+        self.fire = 0
+        self.scroll_map = 0
+        self.exp_reward = 0
+        self.hair_color = 0
+        self.effect = 0
+        self.key = 0
+        self.doll_graphic = 0
+        self.scroll_x = 0
+        self.gender = 0
+        self.scroll_y = 0
+        self.dual_wield_doll_graphic = 0
+        self.level_req = 0
+        self.class_req = 0
+        self.str_req = 0
+        self.int_req = 0
+        self.wis_req = 0
+        self.agi_req = 0
+        self.con_req = 0
+        self.cha_req = 0
+        self.weight = 0
+        self.size = Size.Size1x1
 
     def is_equipable(self):
         return self.type in [Type.Weapon, Type.Shield, Type.Armor, Type.Hat, Type.Boots,
                 Type.Gloves, Type.Accessory, Type.Belt, Type.Necklace, Type.Ring,
                 Type.Armlet, Type.Bracer]
-
     def print_stats(self):
         if self.is_equipable():
             print("Stats:")
@@ -55,63 +100,9 @@ class Item:
         elif self.type == Type.EXPReward:
             print(f"EXP: {self.exp_reward}")
 
-
     def print(self):
         print(f"{self.id} - {self.name}")
         self.print_stats()
         self.print_requirements()
         self.print_effect()
-        print('')
 
-class Special(Enum):
-    Normal = 0
-    Rare = 1
-    UnknownSpecial = 2
-    Unique = 3
-    Lore = 4
-    Cursed = 5
-
-class Type(Enum):
-    Static = 0
-    UnknownType1 = 1
-    Money = 2
-    Heal = 3
-    Teleport = 4
-    Spell = 5
-    EXPReward = 6
-    StatReward = 7
-    SkillReward = 8
-    Key = 9
-    Weapon = 10
-    Shield = 11
-    Armor = 12
-    Hat = 13
-    Boots = 14
-    Gloves = 15
-    Accessory = 16
-    Belt = 17
-    Necklace = 18
-    Ring = 19
-    Armlet = 20
-    Bracer = 21
-    Beer = 22
-    EffectPotion = 23
-    HairDye = 24
-    CureCurse = 25
-
-class SubType(Enum):
-    Nil = 0
-    Ranged = 1
-    Arrows = 2
-    Wings = 3
-    TwoHanded = 4
-
-class Size(Enum):
-    Size1x1 = 0
-    Size1x2 = 1
-    Size1x3 = 2
-    Size1x4 = 3
-    Size2x1 = 4
-    Size2x2 = 5
-    Size2x3 = 6
-    Size2x4 = 7
