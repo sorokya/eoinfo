@@ -9,14 +9,24 @@ class ItemPrinter:
     def print_stats(self):
         if self.item.is_equipable():
             print("Stats:")
-            table = [["HP", f"+{self.item.hp}", "TP", f"+{self.item.tp}", "Damage",
-                      f"{self.item.min_damage} - {self.item.max_damage}"],
-                     ["STR", f"+{self.item.str}", "INT", f"+{self.item.int}", "Accuracy",
-                      f"{self.item.accuracy}"],
-                     ["WIS", f"+{self.item.wis}", "AGI", f"+{self.item.agi}", "Armor",
-                      f"{self.item.armor}"],
-                     ["CON", f"+{self.item.con}", "CHA", f"+{self.item.cha}", "Evade",
-                      f"{self.item.evade}"]]
+            min_damage = self.item.min_damage
+            max_damage = self.item.max_damage
+            table = [["HP", f"+{self.item.hp}",
+                      "TP", f"+{self.item.tp}",
+                      "Damage", f"{min_damage} - {max_damage}"],
+
+                     ["STR", f"+{self.item.str}",
+                      "INT", f"+{self.item.int}",
+                      "Accuracy", f"{self.item.accuracy}"],
+
+                     ["WIS", f"+{self.item.wis}",
+                      "AGI", f"+{self.item.agi}",
+                      "Armor", f"{self.item.armor}"],
+
+                     ["CON", f"+{self.item.con}",
+                      "CHA", f"+{self.item.cha}",
+                      "Evade", f"{self.item.evade}"]]
+
             print(tabulate(table, tablefmt="fancy_grid"))
 
     def print_requirements(self):
@@ -43,13 +53,23 @@ class ItemPrinter:
                 print("Requirements:")
                 print(tabulate(table, tablefmt="fancy_grid"))
 
+    def print_teleport(self):
+        scroll_map = self.item.scroll_map
+        scroll_x = self.item.scroll_x
+        scroll_y = self.item.scroll_y
+        print(f"Map: {scroll_map}, X: {scroll_x}, Y: {scroll_y}")
+
+    def print_potion(self):
+        health_points = self.item.hp
+        technique_points = self.item.tp
+        print(tabulate([["HP", f"+{health_points}"],
+                        ["TP", f"+{technique_points}"]], tablefmt="fancy_grid"))
+
     def print_effect(self):
         if self.item.type == Type.Teleport:
-            print(
-                f"Map: {self.item.scroll_map}, X: {self.item.scroll_x}, Y: {self.item.scroll_y}")
+            self.print_teleport()
         elif self.item.type == Type.Heal and self.item.hp + self.item.tp > 0:
-            print(tabulate([["HP", f"+{self.item.hp}"], ["TP", f"+{self.item.tp}"]],
-                           tablefmt="fancy_grid"))
+            self.print_potion()
         elif self.item.type == Type.EXPReward:
             print(f"EXP: {self.item.exp_reward}")
 
