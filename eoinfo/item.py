@@ -3,6 +3,7 @@ from item_sub_type import SubType
 from item_special import Special
 from item_size import Size
 
+
 class Item:
     def __init__(self):
         self.id = 0
@@ -53,19 +54,20 @@ class Item:
 
     def is_equipable(self):
         return self.type in [Type.Weapon, Type.Shield, Type.Armor, Type.Hat, Type.Boots,
-                Type.Gloves, Type.Accessory, Type.Belt, Type.Necklace, Type.Ring,
-                Type.Armlet, Type.Bracer]
+                             Type.Gloves, Type.Accessory, Type.Belt, Type.Necklace, Type.Ring,
+                             Type.Armlet, Type.Bracer]
+
     def print_stats(self):
         if self.is_equipable():
             print("Stats:")
             table = [["HP", f"+{self.hp}", "TP", f"+{self.tp}", "Damage",
-                  f"{self.min_damage} - {self.max_damage}"],
-                 ["STR", f"+{self.str}", "INT", f"+{self.int}", "Accuracy",
-                  f"{self.accuracy}"],
-                 ["WIS", f"+{self.wis}", "AGI", f"+{self.agi}", "Armor",
-                  f"{self.armor}"],
-                 ["CON", f"+{self.con}", "CHA", f"+{self.cha}", "Evade",
-                  f"{self.evade}"]]
+                      f"{self.min_damage} - {self.max_damage}"],
+                     ["STR", f"+{self.str}", "INT", f"+{self.int}", "Accuracy",
+                      f"{self.accuracy}"],
+                     ["WIS", f"+{self.wis}", "AGI", f"+{self.agi}", "Armor",
+                      f"{self.armor}"],
+                     ["CON", f"+{self.con}", "CHA", f"+{self.cha}", "Evade",
+                      f"{self.evade}"]]
             print(tabulate(table, tablefmt="fancy_grid"))
 
     def print_requirements(self):
@@ -74,7 +76,7 @@ class Item:
             if self.level_req > 0:
                 table.append(["Level", self.level_req])
             if self.class_req > 0:
-                table.append(["Class", self.class_req]) # todo: use class name
+                table.append(["Class", self.class_req])  # todo: use class name
             if self.str_req > 0:
                 table.append(["Str", self.str_req])
             if self.int_req > 0:
@@ -93,10 +95,11 @@ class Item:
 
     def print_effect(self):
         if self.type == Type.Teleport:
-            print(f"Map: {self.scroll_map}, X: {self.scroll_x}, Y: {self.scroll_y}")
+            print(
+                f"Map: {self.scroll_map}, X: {self.scroll_x}, Y: {self.scroll_y}")
         elif self.type == Type.Heal and self.hp + self.tp > 0:
             print(tabulate([["HP", f"+{self.hp}"], ["TP", f"+{self.tp}"]],
-                tablefmt="fancy_grid"))
+                           tablefmt="fancy_grid"))
         elif self.type == Type.EXPReward:
             print(f"EXP: {self.exp_reward}")
 
@@ -105,4 +108,3 @@ class Item:
         self.print_stats()
         self.print_requirements()
         self.print_effect()
-

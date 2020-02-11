@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Type(Enum):
     Static = 0
     UnknownType1 = 1
@@ -27,5 +28,3 @@ class Type(Enum):
     EffectPotion = 23
     HairDye = 24
     CureCurse = 25
-
-

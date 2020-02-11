@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Special(Enum):
     Normal = 0
     Rare = 1

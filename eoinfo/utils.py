@@ -2,6 +2,7 @@ MAX1 = 253
 MAX2 = 64009
 MAX3 = 16194277
 
+
 def decode_number(bytes):
     data = [1, 1, 1, 1]
     for i in range(0, 4):

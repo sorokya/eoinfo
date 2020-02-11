@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Size(Enum):
     Size1x1 = 0
     Size1x2 = 1
