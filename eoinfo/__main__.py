@@ -3,6 +3,7 @@ import sys
 from item_reader import ItemReader
 from item_printer import ItemPrinter
 from npc_reader import NpcReader
+from npc_printer import NpcPrinter
 
 
 def get_args():
@@ -35,10 +36,10 @@ def print_items(search_term):
 
 
 def print_npcs(search_term):
-    print(search_term)
-    #npc_reader = NpcReader("pub/dtn001.enf")
-    # while npc_reader.read():
-    #    npc_reader.npc.print()
+    npc_reader = NpcReader("pub/dtn001.enf")
+    npc_printer = NpcPrinter()
+    while npc_reader.read():
+        npc_printer.print(npc_reader.npc)
 
 
 def print_spells(search_term):

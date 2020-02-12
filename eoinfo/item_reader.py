@@ -1,4 +1,8 @@
-from item import Item, Special, Type, SubType, Size
+from item import Item
+from item_type import Type
+from item_sub_type import SubType
+from item_special import Special
+from item_size import Size
 import utils
 
 
@@ -7,6 +11,9 @@ class ItemReader:
         self.path = path
         self.file = None
         self.data_size = 58
+        self.length = 0
+        self.position = 0
+        self._item = None
 
     def __del__(self):
         if self.file:
