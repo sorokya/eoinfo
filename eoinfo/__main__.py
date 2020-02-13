@@ -4,6 +4,8 @@ from item_reader import ItemReader
 from item_printer import ItemPrinter
 from npc_reader import NpcReader
 from npc_printer import NpcPrinter
+from spell_reader import SpellReader
+from spell_printer import SpellPrinter
 
 
 def get_args():
@@ -43,8 +45,10 @@ def print_npcs(search_term):
 
 
 def print_spells(search_term):
-    print(search_term)
-
+    spell_reader = SpellReader("pub/dsl001.esf")
+    spell_printer = SpellPrinter()
+    while spell_reader.read():
+        spell_printer.print(spell_reader.spell)
 
 def print_classes(search_term):
     print(search_term)
