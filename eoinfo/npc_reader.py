@@ -2,12 +2,11 @@ from npc import Npc
 from npc_type import Type
 import utils
 
-
 class NpcReader:
     def __init__(self, path):
         self.path = path
         self.file = None
-        self.data_size = 39
+        self.data_size = 39 # data buffer size for one npc
         self.length = 0
         self.position = 0
         self._npc = None
@@ -18,6 +17,8 @@ class NpcReader:
 
     def open_file(self):
         self.file = open(self.path, "rb")
+
+        # skips the file identifier and revision ID
         self.file.seek(7)
         self.length = utils.decode_number(self.file.read(2))
         self.file.seek(1, 1)
@@ -27,14 +28,19 @@ class NpcReader:
         if self.file is None:
             self.open_file()
 
+        # kills the loop if we've reached the end of the file
         if self.position > self.length:
             return False
 
         npc = Npc()
         npc.id = self.position
+        
+        # name is dynamic, so we need to find the size each time
         name_size = utils.decode_number(self.file.read(1))
         npc.name = self.file.read(name_size).decode("utf-8")
 
+        # eof means end of file. It should be the last "record"
+        # and we can safely ignore it.
         if npc.name == "eof":
             return False
 
