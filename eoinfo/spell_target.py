@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 class Target(Enum):
     Normal = 0
     Self = 1
