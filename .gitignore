@@ -1,4 +1,8 @@
+# EO Data files
 pub/
+
+# EOServ configuration files
+*.ini
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
