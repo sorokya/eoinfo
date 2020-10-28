@@ -30,44 +30,47 @@ def parse_args_exit(parser):
         sys.exit(1)
 
 
-def print_items(search_term):
-    item_reader = ItemReader("pub/dat001.eif")
+def print_items(path, search_term):
+    item_reader = ItemReader(path + "/pub/dat001.eif")
     item_printer = ItemPrinter()
     while item_reader.read():
         item_printer.print(item_reader.item)
 
 
-def print_npcs(search_term):
-    npc_reader = NpcReader("pub/dtn001.enf")
+def print_npcs(path, search_term):
+    npc_reader = NpcReader(path + "/pub/dtn001.enf")
     npc_printer = NpcPrinter()
     while npc_reader.read():
         npc_printer.print(npc_reader.npc)
 
 
-def print_spells(search_term):
-    spell_reader = SpellReader("pub/dsl001.esf")
+def print_spells(path, search_term):
+    spell_reader = SpellReader(path + "/pub/dsl001.esf")
     spell_printer = SpellPrinter()
     while spell_reader.read():
         spell_printer.print(spell_reader.spell)
 
-def print_classes(search_term):
+def print_classes(path, search_term):
     print(search_term)
 
 
 def parse_args(parser):
     args = parser.parse_args()
 
+    if args.p == "":
+        args.p = "."
+
     if args.i:
-        print_items(args.i)
+        print_items(args.p, args.i)
 
     if args.n:
-        print_npcs(args.n)
+        print_npcs(args.p, args.n)
 
     if args.s:
-        print_spells(args.s)
+        print_spells(args.p, args.s)
 
     if args.c:
-        print_classes(args.c)
+        print_classes(args.p, args.c)
 
 
 def main():
